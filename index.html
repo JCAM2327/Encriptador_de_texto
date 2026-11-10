@@ -1,63 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Encriptador de Texto</title>
-    <link rel="shortcut icon" href="./assets/icono.jpg" type="image/x-icon" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="encriptar">
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encriptador de texto | José Carlos Alayo</title>
+  <meta name="description" content="Encripta y desencripta mensajes con las reglas del challenge de Alura Latam. Todo ocurre en tu navegador." />
+  <meta name="author" content="José Carlos Alayo Mondragón" />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="canonical" href="https://encriptador-de-texto-rho-nine.vercel.app/" />
+  <meta property="og:title" content="Encriptador de texto" />
+  <meta property="og:description" content="Encripta y desencripta mensajes con las reglas del challenge de Alura Latam." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://encriptador-de-texto-rho-nine.vercel.app/" />
+  <meta property="og:locale" content="es_ES" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient--one" aria-hidden="true"></div>
+  <div class="ambient ambient--two" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Encriptador de texto">
+        <span class="brand__mark" aria-hidden="true">Aa</span>
+        <span>Encriptador</span>
+      </a>
+      <span class="topbar__tag">Alura Latam · Challenge</span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow"><span aria-hidden="true"></span> Texto cifrado</p>
+      <h1>Tu texto, <span>en clave.</span></h1>
+      <p class="lede">
+        Encripta y desencripta mensajes con las reglas del challenge de Alura Latam.
+        Sin servidores ni registros: todo ocurre en tu navegador.
+      </p>
+
+      <ul class="rules" aria-label="Reglas de encriptación">
+        <li><code>e</code><span aria-hidden="true">→</span><code>enter</code></li>
+        <li><code>i</code><span aria-hidden="true">→</span><code>imes</code></li>
+        <li><code>a</code><span aria-hidden="true">→</span><code>ai</code></li>
+        <li><code>o</code><span aria-hidden="true">→</span><code>ober</code></li>
+        <li><code>u</code><span aria-hidden="true">→</span><code>ufat</code></li>
+      </ul>
+    </section>
+
+    <div class="workspace">
+      <section class="panel panel--input" aria-labelledby="input-title">
+        <div class="panel__top">
+          <div>
+            <p class="panel__label">Entrada</p>
+            <h2 id="input-title">Texto original</h2>
+          </div>
+          <span class="counter"><span id="contador">0</span> caracteres</span>
+        </div>
+
+        <label class="sr-only" for="texto">Texto a encriptar o desencriptar</label>
         <textarea
-          name="texto"
-          class="texto"
           id="texto"
-          cols="30"
+          name="texto"
           rows="10"
-          placeholder="Ingresa el texto aquí"
+          spellcheck="false"
+          autocomplete="off"
+          placeholder="Escribe aquí tu mensaje..."
+          aria-describedby="ayuda"
         ></textarea>
-        <div class="terminos">
-          <p><b>Sólo letras minúsculas y sin acento</b></p>
-          <img
-            src="./assets/advertencia.png"
-            alt="Advertencia"
-            id="advertencia"
-          />
+
+        <div class="panel__meta">
+          <p id="ayuda">Solo minúsculas y sin acentos.</p>
+          <button type="button" class="link-button" id="normalizar">Normalizar texto</button>
         </div>
-        <div class="botones">
-          <button class="btn-encriptar" type="button" onclick="encriptar()">
-            Encriptar
-          </button>
-          <button
-            class="btn-desencriptar"
-            type="button"
-            onclick="desencriptar()"
-          >
-            Desencriptar
-          </button>
+
+        <div class="actions">
+          <button type="button" class="button button--primary" id="encriptar">Encriptar</button>
+          <button type="button" class="button button--secondary" id="desencriptar">Desencriptar</button>
+          <button type="button" class="button button--ghost" id="limpiar">Limpiar</button>
         </div>
-      </div>
-      <div class="encriptado">
-        <img
-          src="./assets/no_hallado.png"
-          alt="Imagen de texto no encontrado"
-          id="muñeco-con-lupa"
-        />
-        <div class="mensaje-encriptado" id="mensaje-encriptado">
-          <h2 id="titulo-mensaje">Ningún mensaje fue encontrado</h2>
-          <p id="parrafo">
-            Ingresa el texto que deseas encriptar o desencriptar
-          </p>
-          <br />
+      </section>
+
+      <section class="panel panel--result" aria-labelledby="result-title">
+        <div class="panel__top">
+          <div>
+            <p class="panel__label">Salida</p>
+            <h2 id="result-title">Resultado</h2>
+          </div>
+          <button type="button" class="button button--copy" id="copiar" disabled>Copiar</button>
         </div>
-      </div>
+
+        <div class="result" id="resultado" data-state="empty">
+          <div class="result__empty" id="resultadoVacio">
+            <span class="result__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4.5" y="10" width="15" height="10.5" rx="2.5"></rect>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                <circle cx="12" cy="15.2" r="1.4"></circle>
+              </svg>
+            </span>
+            <p>El resultado aparecerá aquí.</p>
+          </div>
+          <p class="result__text" id="textoResultado" hidden></p>
+        </div>
+
+        <p class="status" id="estado" role="status" aria-live="polite">Listo para empezar.</p>
+      </section>
     </div>
+
     <footer class="footer">
-      <p>Desarrollado por José Mondragón</p>
+      <p>Hecho con HTML, CSS y JavaScript.</p>
+      <a href="https://github.com/JCAM2327/Encriptador-de-texto" target="_blank" rel="noopener noreferrer">
+        Ver repositorio <span aria-hidden="true">↗</span>
+      </a>
     </footer>
-  </body>
+  </main>
+
   <script src="index.js"></script>
+</body>
 </html>
