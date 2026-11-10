@@ -1,8 +1,10 @@
 # Encriptador de texto
 
-Aplicación web para encriptar y desencriptar mensajes con las reglas del challenge de Alura Latam.
+Mini aplicación web para encriptar y desencriptar mensajes con reglas de sustitución. Funciona por completo en el navegador, sin servidores ni registros.
 
-**Demo:** <https://encriptador-de-texto-rho-nine.vercel.app/>
+**Demo:** <https://encriptador-de-texto-jose-mondragons-projects.vercel.app/>
+
+**Estado:** proyecto completado y publicado como demo.
 
 ## Funcionalidades
 
@@ -13,7 +15,7 @@ Aplicación web para encriptar y desencriptar mensajes con las reglas del challe
 - Atajos: `Ctrl/Cmd + Enter` para encriptar y `Ctrl/Cmd + Shift + Enter` para desencriptar.
 - Interfaz responsive y accesible.
 
-## Reglas
+## Reglas de sustitución
 
 | Letra | Secuencia |
 | --- | --- |
@@ -47,3 +49,7 @@ npx serve .
 ├── index.js
 └── favicon.svg
 ```
+
+## Nota
+
+Las reglas son una transformación reversible con fines demostrativos. No sustituyen un sistema de cifrado seguro.
